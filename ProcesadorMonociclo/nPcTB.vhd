@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   17:24:01 10/04/2016
+-- Create Date:   21:04:20 10/09/2016
 -- Design Name:   
--- Module Name:   E:/Escritorio0916/GitArq/DavidLopez/ProcesadorMonociclo/addTB.vhd
--- Project Name:  ProcesadorMonociclo
+-- Module Name:   D:/Users/DAVID/Desktop/GITHUB/TallerProcesador1/nPcTB.vhd
+-- Project Name:  procesador
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: add
+-- VHDL Test Bench Created by ISE for module: nPC
 -- 
 -- Dependencies:
 -- 
@@ -32,45 +32,52 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY addTB IS
-END addTB;
+ENTITY nPcTB IS
+END nPcTB;
  
-ARCHITECTURE behavior OF addTB IS 
+ARCHITECTURE behavior OF nPcTB IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT add
+    COMPONENT nPC
     PORT(
-         op1 : IN  std_logic_vector(31 downto 0);
-         op2 : IN  std_logic_vector(31 downto 0);
-         resultado : OUT  std_logic_vector(31 downto 0)
+         clk : IN  std_logic;
+         reset : IN  std_logic;
+         dataIn : IN  std_logic_vector(31 downto 0);
+         dataOut : OUT  std_logic_vector(31 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal op1 : std_logic_vector(31 downto 0) := (others => '0');
-   signal op2 : std_logic_vector(31 downto 0) := (others => '0');
+   signal clk : std_logic := '0';
+   signal reset : std_logic := '0';
+   signal dataIn : std_logic_vector(31 downto 0) := (others => '0');
 
  	--Outputs
-   signal resultado : std_logic_vector(31 downto 0);
-   -- No clocks detected in port list. Replace <clock> below with 
-   -- appropriate port name 
- 
---   constant <clock>_period : time := 10 ns;
+   signal dataOut : std_logic_vector(31 downto 0);
+
+   -- Clock period definitions
+   constant clk_period : time := 10 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: add PORT MAP (
-          op1 => op1,
-          op2 => op2,
-          resultado => resultado
+   uut: nPC PORT MAP (
+          clk => clk,
+          reset => reset,
+          dataIn => dataIn,
+          dataOut => dataOut
         );
 
    -- Clock process definitions
---   <clock>_process :process
-  
+   clk_process :process
+   begin
+		clk <= '0';
+		wait for clk_period/2;
+		clk <= '1';
+		wait for clk_period/2;
+   end process;
  
 
    -- Stimulus process
@@ -79,7 +86,7 @@ BEGIN
       -- hold reset state for 100 ns.
       wait for 100 ns;	
 
-    
+      wait for clk_period*10;
 
       -- insert stimulus here 
 

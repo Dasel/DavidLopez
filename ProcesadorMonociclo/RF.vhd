@@ -19,6 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -53,9 +54,7 @@ begin
 			if(reset = '1')then
 				CRs1 <= (others=>'0');
 				CRs2 <= (others=>'0');
-				registro(16) <= x"fffffff8";
-				registro(17) <= x"00000004";
-				registro(18) <= x"00000007";			
+				registro <= (others => x"00000000");		
 			else
 				CRs1 <= registro(conv_integer(rs1));
 				CRs2 <= registro(conv_integer(rs2));
