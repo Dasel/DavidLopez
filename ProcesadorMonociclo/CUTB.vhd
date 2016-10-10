@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   20:54:00 10/09/2016
+-- Create Date:   20:38:30 10/09/2016
 -- Design Name:   
--- Module Name:   D:/Users/DAVID/Desktop/GITHUB/TallerProcesador1/pcTB.vhd
+-- Module Name:   D:/Users/DAVID/Desktop/GITHUB/TallerProcesador1/CUTB.vhd
 -- Project Name:  procesador
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: PC
+-- VHDL Test Bench Created by ISE for module: CU
 -- 
 -- Dependencies:
 -- 
@@ -32,70 +32,60 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY pcTB IS
-END pcTB;
+ENTITY CUTB IS
+END CUTB;
  
-ARCHITECTURE behavior OF pcTB IS 
+ARCHITECTURE behavior OF CUTB IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT PC
+    COMPONENT CU
     PORT(
-         dataIn : IN  std_logic_vector(31 downto 0);
-         clk : IN  std_logic;
-         reset : IN  std_logic;
-         dataOut : OUT  std_logic_vector(31 downto 0)
+         Op : IN  std_logic_vector(1 downto 0);
+         Op3 : IN  std_logic_vector(5 downto 0);
+         CUout : OUT  std_logic_vector(5 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal dataIn : std_logic_vector(31 downto 0) := (others => '0');
-   signal clk : std_logic := '0';
-   signal reset : std_logic := '0';
+   signal Op : std_logic_vector(1 downto 0) := (others => '0');
+   signal Op3 : std_logic_vector(5 downto 0) := (others => '0');
 
  	--Outputs
-   signal dataOut : std_logic_vector(31 downto 0);
-
-   -- Clock period definitions
-   constant clk_period : time := 10 ns;
+   signal CUout : std_logic_vector(5 downto 0);
+   -- No clocks detected in port list. Replace <clock> below with 
+   -- appropriate port name 
+ 
+--   constant <clock>_period : time := 10 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: PC PORT MAP (
-          dataIn => dataIn,
-          clk => clk,
-          reset => reset,
-          dataOut => dataOut
+   uut: CU PORT MAP (
+          Op => Op,
+          Op3 => Op3,
+          CUout => CUout
         );
 
-   -- Clock process definitions
-   clk_process :process
-   begin
-		clk <= '0';
-		wait for clk_period/2;
-		clk <= '1';
-		wait for clk_period/2;
-   end process;
  
 
    -- Stimulus process
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-      wait for 100 ns;    
+      wait for 100 ns;	
 
-			reset <= '1';
-			wait for 20 ns;	
-			reset <= '0'; 
-			dataIn <= x"00000011";       
-			wait for 20 ns;
-			dataIn <= x"00000100";
-			wait for 20 ns;
-			dataIn <= x"00000111";
-			wait for 20 ns;
-			reset <= '0'; 
+      Op <= "10";
+		Op3 <= "000000" ;wait for 10 ns;
+		Op3 <= "000100" ;wait for 10 ns; 
+		Op3 <= "000001" ;wait for 10 ns;
+		Op3 <= "000101" ;wait for 10 ns;
+		Op3 <= "000010" ;wait for 10 ns;
+		Op3 <= "000110" ;wait for 10 ns;
+		Op3 <= "000011" ;wait for 10 ns;
+		Op3 <= "000111" ;wait for 10 ns;
+
       wait;
    end process;
 
