@@ -2,10 +2,10 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   20:54:00 10/09/2016
+-- Create Date:   16:56:33 10/04/2016
 -- Design Name:   
--- Module Name:   D:/Users/DAVID/Desktop/GITHUB/TallerProcesador1/pcTB.vhd
--- Project Name:  procesador
+-- Module Name:   C:/Users/Usuario/Desktop/usbBackup/PC/pcTB.vhd
+-- Project Name:  PC
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
@@ -84,18 +84,12 @@ BEGIN
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
-      wait for 100 ns;    
+      wait for 100 ns;	
 
-			reset <= '1';
-			wait for 20 ns;	
-			reset <= '0'; 
-			dataIn <= x"00000011";       
-			wait for 20 ns;
-			dataIn <= x"00000100";
-			wait for 20 ns;
-			dataIn <= x"00000111";
-			wait for 20 ns;
-			reset <= '0'; 
+      wait for clk_period*10;
+
+      -- insert stimulus here 
+
       wait;
    end process;
 
