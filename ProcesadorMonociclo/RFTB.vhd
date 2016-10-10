@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   21:09:08 10/09/2016
+-- Create Date:   22:13:51 10/09/2016
 -- Design Name:   
--- Module Name:   D:/Users/DAVID/Desktop/GITHUB/TallerProcesador1/addTB.vhd
+-- Module Name:   D:/Users/DAVID/Desktop/GITHUB/TallerProcesador1/RFTB.vhd
 -- Project Name:  procesador
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: add
+-- VHDL Test Bench Created by ISE for module: RF
 -- 
 -- Dependencies:
 -- 
@@ -32,28 +32,36 @@ USE ieee.std_logic_1164.ALL;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY addTB IS
-END addTB;
+ENTITY RFTB IS
+END RFTB;
  
-ARCHITECTURE behavior OF addTB IS 
+ARCHITECTURE behavior OF RFTB IS 
  
     -- Component Declaration for the Unit Under Test (UUT)
  
-    COMPONENT add
+    COMPONENT RF
     PORT(
-         op1 : IN  std_logic_vector(31 downto 0);
-         op2 : IN  std_logic_vector(31 downto 0);
-         resultado : OUT  std_logic_vector(31 downto 0)
+         rs1 : IN  std_logic_vector(4 downto 0);
+         rs2 : IN  std_logic_vector(4 downto 0);
+         rd : IN  std_logic_vector(4 downto 0);
+         reset : IN  std_logic;
+         datawrite : IN  std_logic_vector(31 downto 0);
+         CRs1 : OUT  std_logic_vector(31 downto 0);
+         CRs2 : OUT  std_logic_vector(31 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
-   signal op1 : std_logic_vector(31 downto 0) := (others => '0');
-   signal op2 : std_logic_vector(31 downto 0) := (others => '0');
+   signal rs1 : std_logic_vector(4 downto 0) := (others => '0');
+   signal rs2 : std_logic_vector(4 downto 0) := (others => '0');
+   signal rd : std_logic_vector(4 downto 0) := (others => '0');
+   signal reset : std_logic := '0';
+   signal datawrite : std_logic_vector(31 downto 0) := (others => '0');
 
  	--Outputs
-   signal resultado : std_logic_vector(31 downto 0);
+   signal CRs1 : std_logic_vector(31 downto 0);
+   signal CRs2 : std_logic_vector(31 downto 0);
    -- No clocks detected in port list. Replace <clock> below with 
    -- appropriate port name 
  
@@ -62,25 +70,29 @@ ARCHITECTURE behavior OF addTB IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: add PORT MAP (
-          op1 => op1,
-          op2 => op2,
-          resultado => resultado
+   uut: RF PORT MAP (
+          rs1 => rs1,
+          rs2 => rs2,
+          rd => rd,
+          reset => reset,
+          datawrite => datawrite,
+          CRs1 => CRs1,
+          CRs2 => CRs2
         );
 
-   -- Clock process definitions
-   --<clock>_process :process
-  
- 
+   
 
    -- Stimulus process
    stim_proc: process
    begin		
       -- hold reset state for 100 ns.
+		reset <= '1';
       wait for 100 ns;	
-
-		op1 <= "00000000000000000000000000010100"; --20
-      op2 <= "00000000000000000000000000000101"; --5
+		reset <= '0';
+		rs1 <= "10000";
+		rs2 <= "10001";
+		rd <= "00001";
+		datawrite <= x"00001000";
 
       wait;
    end process;

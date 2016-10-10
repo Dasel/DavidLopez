@@ -38,7 +38,9 @@ end add;
 architecture Behavioral of add is
 
 begin
+
 	process(op2,op2)
+	
 		begin
 			resultado <=  op1 + op2;
 		end process;

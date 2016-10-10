@@ -35,13 +35,13 @@ entity CU is
            CUout : out  STD_LOGIC_VECTOR (5 downto 0));
 end CU;
 
+
 architecture Behavioral of CU is
 
 begin
 
 	process (Op, Op3)	
-	begin
-	
+	begin	
 		if(Op = "10") then
 			case (Op3) is
 				when("000000") =>
