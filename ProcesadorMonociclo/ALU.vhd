@@ -20,7 +20,7 @@ architecture Behavioral of ALU is
 begin
 	process(op1,op2,aluOP)
 	begin
-	   case (ALUOp) is 
+	   case (aluOP) is 
 			when "000001" => -- Add
 				AluResult <= op1 + op2;				
 			when "000010" => -- Sub
