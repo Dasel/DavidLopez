@@ -61,7 +61,7 @@ architecture Behavioral of ProcesadorMonociclo is
 		Port ( aluOP : in  STD_LOGIC_VECTOR (5 downto 0);
 			  op1 : in  STD_LOGIC_VECTOR (31 downto 0);
            op2 : in  STD_LOGIC_VECTOR (31 downto 0);
-			  carry : in STD_LOGIC;
+			--  carry : in STD_LOGIC;
            AluResult : out  STD_LOGIC_VECTOR (31 downto 0));
 		end component;
 
@@ -132,7 +132,7 @@ begin
 		op1 => auxCRs1,
 		op2 => auxCRs2,
 		aluOP => auxAlu,
-		carry => carryAlu,
+	--	carry => carryAlu,
 		AluResult => salida	
 		);
 	
