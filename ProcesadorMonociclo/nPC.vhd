@@ -17,6 +17,7 @@
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -29,32 +30,26 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-
 entity nPC is
     Port ( clk : in  STD_LOGIC;
 			  reset : in STD_LOGIC;
-           dataIn : in  STD_LOGIC_VECTOR (31 downto 0);
-           dataOut : out  STD_LOGIC_VECTOR (31 downto 0));
+           nPC_in : in  STD_LOGIC_VECTOR (31 downto 0);
+           nPC_out : out  STD_LOGIC_VECTOR (31 downto 0));
 end nPC;
-
 
 architecture Behavioral of nPC is
 
 begin
 
-	process (clk, reset, dataIn)
+	process (clk, reset, nPC_in)
 	begin
-	
 		if (reset = '1') then
-			dataOut <= (others => '0');
+			nPC_out <= (others => '0');
 		else
 			if(rising_edge(clk)) then
-				dataOut <= dataIn;
+				nPC_out <= nPC_in;
 			end if;
 		end if;
-		
 end process;
 
 end Behavioral;

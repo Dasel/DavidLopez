@@ -17,6 +17,7 @@
 -- Additional Comments: 
 --
 ----------------------------------------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
@@ -31,7 +32,7 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity add is
- Port ( op1 : in  STD_LOGIC_VECTOR (31 downto 0);
+    Port ( op1 : in  STD_LOGIC_VECTOR (31 downto 0);
            op2 : in  STD_LOGIC_VECTOR (31 downto 0);
            resultado : out  STD_LOGIC_VECTOR (31 downto 0));
 end add;
@@ -39,12 +40,13 @@ end add;
 architecture Behavioral of add is
 
 begin
+	
+	process (op1, op2)
+	begin
+		
+		resultado <= op1 + op2; 
+	
+	end process;
+	
 
-	process(op2,op2)
-	
-		begin
-			resultado <=  op1 + op2;
-		end process;
-	
 end Behavioral;
-
