@@ -32,7 +32,8 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity ALU is
-    Port ( aluOP : in  STD_LOGIC_VECTOR (5 downto 0);
+    Port ( c : in  STD_LOGIC;
+			  aluOP : in  STD_LOGIC_VECTOR (5 downto 0);
            CRs1 : in  STD_LOGIC_VECTOR (31 downto 0);
            CRs2 : in  STD_LOGIC_VECTOR (31 downto 0);
            AluResult : out  STD_LOGIC_VECTOR (31 downto 0));
@@ -45,9 +46,9 @@ begin
 	begin
 	   case (aluOP) is 
 			when "000001" => -- Add
-				AluResult <= CRs1 + CRs2;
+				AluResult <= CRs1 + CRs2 + c;
 			when "000010" => -- Sub
-				AluResult <= CRs1 - CRs2;
+				AluResult <= CRs1 - CRs2 - c;
 			when "000011" => -- And
 				AluResult <= CRs1 and CRs2;
 			when "000100" => -- Nand
