@@ -75,7 +75,6 @@ architecture Behavioral of Procesador2 is
 
 	component ALU
 	Port(
-		c : in  STD_LOGIC;
 		CRs1 : IN std_logic_vector(31 downto 0);
 		CRs2 : IN std_logic_vector(31 downto 0);
 		aluOP : IN std_logic_vector(5 downto 0);
@@ -91,23 +90,6 @@ architecture Behavioral of Procesador2 is
            );
 	end component;
 	
-	component PSRM
-		Port ( 
-			  Op1 : in  STD_LOGIC;
-           Op2 : in  STD_LOGIC;
-			  Aluresult : in  STD_LOGIC_VECTOR (31 downto 0);
-           Aluop : in  STD_LOGIC_VECTOR (5 downto 0);
-			  reset : in STD_LOGIC;
-           nzvc : out  STD_LOGIC_VECTOR (3 downto 0));
-	end component;
-	
-	component PSR
-		Port ( reset : in  STD_LOGIC;
-           clk : in  STD_LOGIC;
-           nzvc : in  STD_LOGIC_VECTOR (3 downto 0);
-           psr_out : out  STD_LOGIC);
-	end component;
-	
 	component SEU
 		 Port ( imm : in  STD_LOGIC_VECTOR (12 downto 0);
            dataOut : out  STD_LOGIC_VECTOR (31 downto 0));
@@ -115,9 +97,8 @@ architecture Behavioral of Procesador2 is
 	
 	signal resultado, auxPC, PC_out, auxRF, auxCRs1, auxCRs2, AluResult : std_logic_vector(31 downto 0);
 	signal CU_out : std_logic_vector(5 downto 0);
-	signal aux_c :   STD_LOGIC;
 	signal SEUout,MUXout : std_logic_vector(31 downto 0);
-	signal icc : std_logic_vector(3 downto 0);
+
 begin
 
 	aux_nPC: nPC PORT MAP(
@@ -152,10 +133,7 @@ begin
 		CU_out => CU_out
 	);
 	
-	aux_SEU: SEU PORT MAP(
-		imm =>auxRF(12 downto 0),
-      dataOut =>SEUout
-	);
+
 	
 	aux_RF: RF PORT MAP(
 		reset => rst,
@@ -167,13 +145,11 @@ begin
 		CRs2 => auxCRs2
 	);
 	
-	aux_PSR: PSR PORT MAP(
-		reset => rst,
-		clk => clk,
-      nzvc => icc,
-      psr_out => aux_c
+	aux_SEU: SEU PORT MAP(
+		imm =>auxRF(12 downto 0),
+      dataOut =>SEUout
 	);
-		
+
 	aux_MUX: MUX PORT MAP(
 		op1 =>auxCRs2,
       op2 =>SEUout,
@@ -181,17 +157,8 @@ begin
 		i =>auxRF(13)
 	);
 	
-	aux_PSRM: PSRM PORT MAP(
-		Op1 => auxCRs1(31),
-      Op2 => MUXout(31),
-		Aluresult => AluResult,
-      Aluop => CU_out,
-		reset => rst,
-      nzvc => icc 
-	);
 	
 	aux_ALU: ALU PORT MAP(
-		c => aux_c,
 		CRs1 => auxCRs1,
 		CRs2 => MUXout,
 		aluOP => CU_out,

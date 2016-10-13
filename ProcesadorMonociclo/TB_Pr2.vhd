@@ -83,8 +83,7 @@ BEGIN
       -- hold reset state for 100 ns.
       rst <= '1';
       wait for 40 ns;	
-		rst <= '0';
-
+		rst <= '0';		
       -- insert stimulus here 
 
       wait;
