@@ -49,14 +49,10 @@ begin
 	process(reset,rs1,rs2,rd,datawrite)
 	begin
 	
-			registro(0) <= x"00000000";	
 			if(reset = '1')then
 				CRs1 <= (others=>'0');
-				CRs2 <= (others=>'0');
-				registro(16) <= x"fffffff8";
-				registro(17) <= x"00000004";
-				registro(18) <= x"00000007";
-				
+				CRs2 <= (others=>'0');				
+				registro <= (others => x"00000000");
 				
 			else
 				CRs1 <= registro(conv_integer(rs1));

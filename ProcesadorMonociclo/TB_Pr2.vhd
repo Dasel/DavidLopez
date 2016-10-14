@@ -35,6 +35,7 @@ USE ieee.std_logic_1164.ALL;
 ENTITY TB_Pr2 IS
 END TB_Pr2;
  
+ 
 ARCHITECTURE behavior OF TB_Pr2 IS 
  
     -- Component Declaration for the Unit Under Test (UUT)

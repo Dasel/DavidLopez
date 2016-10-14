@@ -127,13 +127,6 @@ begin
 		IM_out => auxRF
 	);
 	
-	aux_CU: CU PORT MAP(
-		Op => auxRF(31 downto 30),
-		Op3 => auxRF(24 downto 19),
-		CU_out => CU_out
-	);
-	
-
 	
 	aux_RF: RF PORT MAP(
 		reset => rst,
@@ -144,7 +137,14 @@ begin
 		CRs1 => auxCRs1,
 		CRs2 => auxCRs2
 	);
+
+	aux_CU: CU PORT MAP(
+		Op => auxRF(31 downto 30),
+		Op3 => auxRF(24 downto 19),
+		CU_out => CU_out
+	);
 	
+
 	aux_SEU: SEU PORT MAP(
 		imm =>auxRF(12 downto 0),
       dataOut =>SEUout
