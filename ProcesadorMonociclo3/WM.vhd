@@ -32,6 +32,7 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity WM is
+
     Port ( RS1 : in  STD_LOGIC_VECTOR (4 downto 0);
            RS2 : in  STD_LOGIC_VECTOR (4 downto 0);
            RD : in  STD_LOGIC_VECTOR (4 downto 0);
@@ -41,8 +42,7 @@ entity WM is
            nRS2 : out  STD_LOGIC_VECTOR (5 downto 0);
            nRD : out  STD_LOGIC_VECTOR (5 downto 0);
            cwp : in  STD_LOGIC;
-           ncwp : out  STD_LOGIC;
-			  rg : out  STD_LOGIC_VECTOR (5 downto 0)
+           ncwp : out  STD_LOGIC
 			  );
 end WM;
 
@@ -53,18 +53,13 @@ begin
 
 	process(RS1,RS2,RD,cwp,OP,OP3)
 	begin
-		
-		if cwp = '1' then
-			rg <= "011111";
-		else
-			rg <= "001111";
-		end if;
-		
+				
 		if(OP = "10" and OP3 = "111100")then 
 			ncwp <= '0';
 		elsif(OP = "10" and OP3 = "111101")then 
 			ncwp <= '1';
-		end if;
+		end if; 
+		
 		
 		
 		if(RS1>="11000" and RS1<="11111") then 
@@ -123,6 +118,7 @@ begin
 				end if;
 			end if;
 		 end if;
+		 
 		 
 		 
 		 
