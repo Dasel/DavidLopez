@@ -64,9 +64,9 @@ architecture Behavioral of Procesador4 is
 	component RF
 	Port(
 		reset : IN std_logic;
-		rs1 : IN std_logic_vector(4 downto 0);
-		rs2 : IN std_logic_vector(4 downto 0);
-		rd : IN std_logic_vector(4 downto 0);
+		rs1 : IN std_logic_vector(5 downto 0);
+		rs2 : IN std_logic_vector(5 downto 0);
+		rd : IN std_logic_vector(5 downto 0);
 		datawrite : IN std_logic_vector(31 downto 0);          
 		CRs1 : OUT std_logic_vector(31 downto 0);
 		CRs2 : OUT std_logic_vector(31 downto 0)
@@ -190,9 +190,9 @@ architecture Behavioral of Procesador4 is
 	
 	aux_RF: RF PORT MAP(
 		reset => rst,
-		rs1 => auxRF(18 downto 14),
-		rs2 => auxRF(4 downto 0),
-		rd => auxRF(29 downto 25),
+		rs1 => auxnRS1,
+		rs2 => auxnRS2,
+		rd => auxnRD,
 		datawrite => AluResult,
 		CRs1 => auxCRs1,
 		CRs2 => auxCRs2
