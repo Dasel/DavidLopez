@@ -19,6 +19,8 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -34,7 +36,6 @@ entity DM is
 			  rst : in STD_LOGIC;
 			  cRD : in  STD_LOGIC_VECTOR (31 downto 0);
            aluIn : in STD_LOGIC_VECTOR (31 downto 0);	
-			  rdenmem  : in  STD_LOGIC;			  
            wrenmem : in  STD_LOGIC;
            datatomem : out  STD_LOGIC_VECTOR (31 downto 0));
 
@@ -48,7 +49,6 @@ begin
 	process(clk)
 	begin
 		if(rising_edge(clk))then
-			if(rdenmem = '1') then
 				if(rst = '1')then
 					datatomem <= (others => '0');
 					ramMemory <= (others => x"00000000");
@@ -58,7 +58,6 @@ begin
 					else
 						ramMemory(conv_integer(aluIn(5 downto 0))) <= cRD;
 					end if;
-				end if;
 			end if;
 		end if;
 	end process;

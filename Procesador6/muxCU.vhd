@@ -32,7 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity muxCU is
 	Port ( PCDisp30 : in  STD_LOGIC_VECTOR (31 downto 0);
            PCDisp22 : in  STD_LOGIC_VECTOR (31 downto 0);
-           PC4 : in  STD_LOGIC_VECTOR (31 downto 0);
+           PC1 : in  STD_LOGIC_VECTOR (31 downto 0);
            aluResult : in  STD_LOGIC_VECTOR (31 downto 0);
            PCSource : in  STD_LOGIC_VECTOR (1 downto 0);
            mux_out : out  STD_LOGIC_VECTOR (31 downto 0));
@@ -42,7 +42,7 @@ end muxCU;
 architecture Behavioral of muxCU is
 
 begin
-process(PCDisp30,PCDisp22,PC4,aluResult,PCSource)
+process(PCDisp30,PCDisp22,PC1,aluResult,PCSource)
 begin
 		case PCSource is
 			when "00" =>
@@ -52,9 +52,9 @@ begin
 			when "10" =>
 				mux_out <= PCDisp22;
 			when "11" =>
-				mux_out <= PC4;
+				mux_out <= PC1;
 			when others =>
-				mux_out <= PC4;
+				mux_out <= PC1;
 		end case;
 end process;
 
